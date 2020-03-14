@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ntlparks</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.09024, lng: -110.712891},
+          zoom: 3
+        });
+
+        // List comes from https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States
+        var nationalParks = [
+            {
+                title: 'Acadia',
+                position: new google.maps.LatLng(44.35, -68.21)
+            },
+            {
+                title: 'American Samoa',
+                position: new google.maps.LatLng(-14.25, -170.68)
+            },
+            {
+                title: 'Arches',
+                position: new google.maps.LatLng(38.68, -109.57)
+            },
+            {
+                title: 'Badlands',
+                position: new google.maps.LatLng(43.75, -102.50)
+            },
+            {
+                title: 'Big Bend',
+                position: new google.maps.LatLng(29.25, -103.25)
+            },
+            {
+                title: 'Biscayne',
+                position: new google.maps.LatLng(25.65, -80.08)
+            },
+            {
+                title: 'Black Canyon of the Gunnison',
+                position: new google.maps.LatLng(38.57, -107.72)
+            },
+            {
+                title: 'Bryce Canyon',
+                position: new google.maps.LatLng(37.57, -112.18)
+            },
+            {
+                title: 'Canyonlands',
+                position: new google.maps.LatLng(38.2, -109.93)
+            },
+            {
+                title: 'Capital Reef',
+                position: new google.maps.LatLng(38.2, -111.17)
+            },
+            {
+                title: 'Carlsbad Caverns',
+                position: new google.maps.LatLng(32.17, -104.44)
+            },
+            {
+                title: 'Channel Islands',
+                position: new google.maps.LatLng(34.01, -119.42)
+            },
+            {
+                title: 'Congaree',
+                position: new google.maps.LatLng(33.78, -80.78)
+            },
+            {
+                title: 'Crater Lake',
+                position: new google.maps.LatLng(42.94, -122.1)
+            },
+            {
+                title: 'Cuyahoga Valley',
+                position: new google.maps.LatLng(41.24, -81.55)
+            },
+            {
+                title: 'Death Valley',
+                position: new google.maps.LatLng(36.24, -116.82)
+            },
+            {
+                title: 'Denali',
+                position: new google.maps.LatLng(63.33, -150.50)
+            },
+            {
+                title: 'Dry Tortugas',
+                position: new google.maps.LatLng(24.63, -82.87)
+            },
+            {
+                title: 'Everglades',
+                position: new google.maps.LatLng(25.32, -80.93)
+            },
+            {
+                title: 'Gates of the Arctic',
+                position: new google.maps.LatLng(67.78, -153.30)
+            },
+            {
+                title: 'Gateway Arch',
+                position: new google.maps.LatLng(38.63, -90.19)
+            },
+            {
+                title: 'Glacier',
+                position: new google.maps.LatLng(48.80, -114.00)
+            },
+            {
+                title: 'Glacier Bay',
+                position: new google.maps.LatLng(58.50, -137.00)
+            },
+            {
+                title: 'Grand Canyon',
+                position: new google.maps.LatLng(36.06, -112.14)
+            },
+            {
+                title: 'Grand Teton',
+                position: new google.maps.LatLng(43.73, -110.80)
+            },
+            {
+                title: 'Great Basin',
+                position: new google.maps.LatLng(38.98, -114.30)
+            },
+            {
+                title: 'Great Sand Dunes',
+                position: new google.maps.LatLng(37.73, -105.51)
+            },
+            {
+                title: 'Great Smoky Mountains',
+                position: new google.maps.LatLng(35.68, -83.53)
+            },
+            {
+                title: 'Guadalupe Mountains',
+                position: new google.maps.LatLng(31.92, -104.87)
+            },
+            {
+                title: 'Haleakalā',
+                position: new google.maps.LatLng(20.72, -156.17)
+            },
+            {
+                title: 'Hawaiʻi Volcanoes',
+                position: new google.maps.LatLng(19.38, -155.20)
+            },
+            {
+                title: 'Hot Springs',
+                position: new google.maps.LatLng(34.51, -93.05)
+            },
+            {
+                title: 'Indiana Dunes',
+                position: new google.maps.LatLng(41.6533, -87.0524)
+            },
+            {
+                title: 'Isle Royale',
+                position: new google.maps.LatLng(48.10, -88.55)
+            },
+            {
+                title: 'Joshua Tree',
+                position: new google.maps.LatLng(33.79, -115.90)
+            },
+            {
+                title: 'Katmai',
+                position: new google.maps.LatLng(58.50, -155.00)
+            },
+            {
+                title: 'Kenai Fjords',
+                position: new google.maps.LatLng(59.92, -149.65)
+            },
+            {
+                title: 'Kings Canyon',
+                position: new google.maps.LatLng(36.80, -118.55)
+            },
+            {
+                title: 'Kobuk Valley',
+                position: new google.maps.LatLng(67.55, -159.28)
+            },
+            {
+                title: 'Lake Clark',
+                position: new google.maps.LatLng(60.97, -153.42)
+            },
+            {
+                title: 'Lassen Volcanic',
+                position: new google.maps.LatLng(40.49, -121.51)
+            },
+            {
+                title: 'Mammoth Cave',
+                position: new google.maps.LatLng(37.18, -86.10)
+            },
+            {
+                title: 'Mesa Verde',
+                position: new google.maps.LatLng(37.18, -108.49)
+            },
+            {
+                title: 'Mount Rainier',
+                position: new google.maps.LatLng(46.85, -121.75)
+            },
+            {
+                title: 'North Cascades',
+                position: new google.maps.LatLng(48.70, -121.20)
+            },
+            {
+                title: 'Olympic',
+                position: new google.maps.LatLng(47.97, -123.50)
+            },
+            {
+                title: 'Petrified Forest',
+                position: new google.maps.LatLng(35.07, -109.78)
+            },
+            {
+                title: 'Pinnacles',
+                position: new google.maps.LatLng(36.48, -121.16)
+            },
+            {
+                title: 'Redwood',
+                position: new google.maps.LatLng(41.30, -124.00)
+            },
+            {
+                title: 'Rocky Mountain',
+                position: new google.maps.LatLng(40.40, -105.58)
+            },
+            {
+                title: 'Saguaro',
+                position: new google.maps.LatLng(32.25, -110.50)
+            },
+            {
+                title: 'Sequoia',
+                position: new google.maps.LatLng(36.43, -118.68)
+            },
+            {
+                title: 'Shenandoah',
+                position: new google.maps.LatLng(38.53, -78.35)
+            },
+            {
+                title: 'Theodore Roosevelt',
+                position: new google.maps.LatLng(46.97, -103.45)
+            },
+            {
+                title: 'Virgin Islands',
+                position: new google.maps.LatLng(18.33, -64.73)
+            },
+            {
+                title: 'Voyageurs',
+                position: new google.maps.LatLng(48.50, -92.88)
+            },
+            {
+                title: 'White Sands',
+                position: new google.maps.LatLng(32.78, -106.17)
+            },
+            {
+                title: 'Wind Cave',
+                position: new google.maps.LatLng(43.57, -103.48)
+            },
+            {
+                title: 'Wrangell-St. Elias',
+                position: new google.maps.LatLng(61.00, -142.00)
+            },
+            {
+                title: 'Yellowstone',
+                position: new google.maps.LatLng(44.60, -110.50)
+            },
+            {
+                title: 'Yosemite',
+                position: new google.maps.LatLng(37.83, -119.50)
+            },
+            {
+                title: 'Zion',
+                position: new google.maps.LatLng(37.30, -113.05)
+            }
+        ];
+
+        nationalParks.forEach(nationalPark => {
+            var marker = new google.maps.Marker({
+                position: nationalPark.position,
+                title: nationalPark.title
+            });
+
+            marker.setMap(map);
+        })
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmWCNwDR4UeKhgSIYJVVufSEmeYsmJ7EU&callback=initMap"
+    async defer></script>
+  </body>
+</html>
